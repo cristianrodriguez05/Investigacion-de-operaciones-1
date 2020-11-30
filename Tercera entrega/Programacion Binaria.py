@@ -7,31 +7,44 @@ class Binario:
    def __init__(self):
         self.peso = None
    
-   def calcular(self, var, ttablas, ttablasa, marc1):
-      print(ttablas)
+   def calcular(self, restri, vari, ttablas, ttablasa, marc1):
+      listacon = []
+      listautil = []
+      var = int(vari)
+      restr = int(restri)
+      for i in range(var):
+         listacon.append(int (ttablas['tabla'+str(i+1)].get()))
+      for i in range(var):
+         listautil.append(int (ttablasa['tablaa'+str(i+1)].get()))
       
-      print(ttablas['tabla1'].get)
-      print(ttablas['tabla1'])
-      print(ttablas['tabla1'.get])
-      K = [[0 for x in range(W + 1)] for x in range(var + 1)]
+      print(listacon)
+      print(listautil)
+      print(var)
+      print(restr)
+
+      
+      K = [[0 for x in range(restr + 1)] for x in range(var + 1)]
       #Tabla de abajo hacia arriba
       for i in range(var + 1):
-         for w in range(W + 1):
+         for w in range(restr + 1):
             if i == 0 or w == 0:
                K[i][w] = 0
-            elif wt[i-1] <= w:
-               K[i][w] = max(val[i-1] + K[i-1][w-wt[i-1]], K[i-1][w])
+            elif listacon[i-1] <= w:
+               K[i][w] = max(listautil[i-1] + K[i-1][w-listacon[i-1]], K[i-1][w])
             else:
                K[i][w] = K[i-1][w]
        # Devuelve el valor máximo de beneficio que puede almacenar la bolsa
-      return K[n][W]
+      
+      print(K[var][restr])
+      print(var)
    #Main
 
-   def ingresar_variables(self, nodo, marc):
+   def ingresar_variables(self, nodos, nodo, marc):
       tablas = dict()
       tablasa = dict()
       Titulo3 = tk.Label(marc, text="         Ingresar  condicion        ", bg="yellow").grid(row=8,column=0)
       Titulo4 = tk.Label(marc, text="          Ingresar  utilidad        ", bg="yellow").grid(row=9,column=0)
+      restriccion = int(nodos)
       variable = int(nodo)
       for i in range(variable):
          tablas['tabla'+str(i+1)] = Entry(marc)
@@ -44,8 +57,8 @@ class Binario:
          tablasa['tablaa'+str(i+1)].grid(row=9,column=i+1)
          print(variable)
       Texto112 = tk.Label(marc, text="___________________________________________________").grid(row=10,column=0)
-      btnInsertarVar = Button(marc,text='Ingresar', command=lambda: binario.calcular(variable, tablas, tablasa ,marc)).grid(row=10,column=1,sticky=tk.W,pady=4)
-
+      btnInsertarVar = Button(marc,text='Ingresar', command=lambda: binario.calcular(restriccion, variable, tablas, tablasa ,marc)).grid(row=10,column=1,sticky=tk.W,pady=4)
+      
       
    def iniciar(self):
       marco=tk.Tk()
@@ -67,7 +80,7 @@ class Binario:
       e2.grid(row=6,column=0)
 
       Texto111 = tk.Label(marco, text="___________________________________________________").grid(row=7,column=0)
-      btnInsertar = Button(marco,text='Ingresar', command=lambda: binario.ingresar_variables(e2.get(),marco)).grid(row=7,column=1,sticky=tk.W,pady=4)
+      btnInsertar = Button(marco,text='Ingresar', command=lambda: binario.ingresar_variables(e1.get(),e2.get(),marco)).grid(row=7,column=1,sticky=tk.W,pady=4)
       
       marco.mainloop()
 
