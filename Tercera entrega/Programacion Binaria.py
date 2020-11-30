@@ -9,9 +9,13 @@ class Binario:
    
    def calcular(self, var, ttablas, ttablasa, marc1):
       print(ttablas)
-      K = [[0 for x in range(W + 1)] for x in range(n + 1)]
+      
+      print(ttablas['tabla1'].get)
+      print(ttablas['tabla1'])
+      print(ttablas['tabla1'.get])
+      K = [[0 for x in range(W + 1)] for x in range(var + 1)]
       #Tabla de abajo hacia arriba
-      for i in range(n + 1):
+      for i in range(var + 1):
          for w in range(W + 1):
             if i == 0 or w == 0:
                K[i][w] = 0
