@@ -11,7 +11,8 @@ def mochila(W, wt, val, n):
             K[i][w] = K[i-1][w]
     # Devuelve el valor máximo de beneficio que puede almacenar la bolsa
    return K[n][W]
-#Main
+
+
 #val = [100,60,70,15,9]
 #wt = [42,23,21,15,7]
 #W = 60

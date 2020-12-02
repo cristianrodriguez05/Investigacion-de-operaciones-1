@@ -35,9 +35,16 @@ class Binario:
                K[i][w] = K[i-1][w]
        # Devuelve el valor máximo de beneficio que puede almacenar la bolsa
       
-      print(K[var][restr])
       print(var)
-   #Main
+      result1= tk.StringVar()
+
+      Titulo1 = tk.Label(marc1, text="         Valor Z           ", bg="yellow").grid(row=11,column=0)
+
+      etiqueta1=tk.Label(marc1, textvariable = result1)
+      etiqueta1.grid(row=12, column=0)
+      result1.set(K[var][restr])
+      print(var)
+      
 
    def ingresar_variables(self, nodos, nodo, marc):
       tablas = dict()
@@ -64,7 +71,7 @@ class Binario:
       marco=tk.Tk()
       marco.title("Binario")
       marco.geometry("1400x600")
-      marco.configure(background="#f2f2d4")
+      marco.configure(background="#000000")
 
 
       Titulo1 = tk.Label(marco, text="         Ingresar restriccion           ", bg="yellow").grid(row=0,column=0)
@@ -87,8 +94,3 @@ class Binario:
 
 binario = Binario()
 binario.iniciar()
-
-#val = [100,60,70,15,9]
-wt = [42,23,21,15,7]
-W = 60
-n = len(val)
