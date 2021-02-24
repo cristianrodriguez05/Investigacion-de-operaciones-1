@@ -2,6 +2,7 @@ import Tkinter as tk
 from Tkinter import *
 import Tkinter 
 import tkMessageBox
+#libreria usada Tkinter
 
 class Binario:
    vacuna = None
@@ -9,12 +10,14 @@ class Binario:
    def __init__(self):
         self.vacuna = None
 
+        
+   #funcion para mostrar resultado en pantalla
    def resultadofinal(self, nombre, valor):
       
       etapa = "-----------------------"
       mensaje = "------------------------"
       fecha = "-------------------------"
-
+      #seleccion del mensaje a mostrar deacuerdo a los datos obtenidos deacuerdo al maximo valor de beneficio y bnjo la restriccion
       if valor > 100000:
          etapa= "Etapa I"
          mensaje= "Talento humano en salud en primera línea, personal de apoyo asistencial,personal de servicios generales y administrativos, adultos mayores de 80 años."
@@ -39,7 +42,7 @@ class Binario:
          etapa = "Fila de espera"
          mensaje = "Las personas segun cambios en los parametros establecidos para personas menores de 16 años y mujeres en estado de gestacion"
          fecha = "Por definir"
-         
+      # se muestra el resultado con los datos ingresados y se da una respuesta de la vacunacion
       tkMessageBox.showinfo('Resultado aplicativo de vacunacion',"Usted  " + nombre + "\n\n"  + "Pertenece a la  "+ etapa + "\n\n" + "En esta etapa las vacunas seran destinadas a:" + "\n\n" + mensaje+ "\n\n"+ "Fecha para inicio de vacunacion de la etapa:" + "\n\n" + fecha)
 
 
@@ -47,28 +50,14 @@ class Binario:
    
    def calcular(self, nombre,saludp,saluds,enfermedadd,edadd,institutoo, marc1):
 
-      
-      print("____________________hgbfvdcsx_____________")
-      print(saludp)
-      print(saluds)
-      print(enfermedadd)
-      print(edadd)
-      print(institutoo)
-
+      #variable con los valores de los datos de la funcion anterior
       valor=saludp+saluds+enfermedadd+edadd+institutoo
-      print(valor)
       listacon = []
       listautil = []
       var = 1
       restr = 300000 
       listacon.append(valor)
-      listautil.append(valor)
-      
-      print(listautil)
-      print(var)
-      print(restr)
-
-      
+      listautil.append(valor) 
       K = [[0 for x in range(restr + 1)] for x in range(var + 1)]
       #Tabla de abajo hacia arriba
       for i in range(var + 1):
@@ -84,30 +73,22 @@ class Binario:
       resultado= K[var][restr]
       print("         El Valor Z es igual a:         ")
       print(resultado)
+      # se envai el valor de resultado a la funcion resultadofinal para mostrar los resultados correspondientes
       binario.resultadofinal(nombre,resultado)
       
-
+   #funcion para unificar datos en variables unicas
    def ingresar_variables(self, nombre, edad1, salud1,enf1, enf2,enf3,enf4,enf5,enf6,enf7,enf8,enf9,enf10,instituto,marc):
-  
-
       
       saludpri = IntVar()
       saludseg = IntVar()
       enfermedad = IntVar()
       edadval = IntVar()
       institutoval = IntVar()
-
-
-      print("_________________________________")
-      print(saludpri)
-      print(saludseg)
-      print(enfermedad)
-      print(edadval)
-      print(institutoval)
-
       edad = int(edad1)
       salud = int(salud1)
       enfermedad = 0
+
+      #variable unica edad
       if edad >= 80:
          edadval = 100000
       elif edad >= 60:
@@ -117,6 +98,7 @@ class Binario:
       else:
          edadval = 1
 
+      #variables unicas saludseg y saludpri, derivadas de la varible salud
       if salud != 9 and salud !=10:
          saludpri = 100000
          saludseg = 1
@@ -126,7 +108,8 @@ class Binario:
       else:
          saludseg = 1
          saludpri = 1
-
+         
+      #variable unica enfermedad
       if enf1 == True:
          enfermedad = enfermedad + 1000
       if enf2 == True:
@@ -148,6 +131,7 @@ class Binario:
       if enf10 == True:
          enfermedad = enfermedad + 1000
 
+      #variable unica instituto
       if instituto == 1 or instituto == 2 or instituto == 3 or instituto == 4 or instituto == 8:
          institutoval = 1000
       elif instituto == 5 or instituto == 6 or instituto == 7 or instituto == 9:
@@ -155,17 +139,10 @@ class Binario:
       else:
          institutoval = 1
 
-
-      print("_________________________________")
-      print(saludpri)
-      print(saludseg)
-      print(enfermedad)
-      print(edadval)
-      print(institutoval)
-
+      #se envian a la funcion calcular los datos agrupados en las variables unicas
       binario.calcular(nombre,saludpri,saludseg,enfermedad,edadval,institutoval,marc)
 
-      
+   # Funcion donde se define la interfaz grafica  
    def iniciar(self):
 
       marco=tk.Tk()
@@ -173,30 +150,36 @@ class Binario:
       marco.geometry("810x750")
       marco.configure(background="#000000")
 
+      # Encabezado del aplicativo 
       Encabezado1 = tk.Label(marco, text="         Aplicativo para las etapas de vacunación en Colombia          ", bg="OliveDrab3",font=(None, 20)).grid(row=0,column=0,columnspan=5)
       Bar1 = tk.Label(marco, text="___________________________________________________", bg="black",fg="black").grid(row=1,column=0,columnspan=5)
       Encabezado2 = tk.Label(marco, text=" Por favor diligencie los siguientes campos para poder conocer la etapa ", bg="grey").grid(row=2,column=0,columnspan=5)
       Encabezado3 = tk.Label(marco, text=" en la que va a recibir la vacuna contra el COVID-19 ", bg="grey").grid(row=3,column=0,columnspan=5)
       Barra1 = tk.Label(marco, text="________________________________________________________________________________________________________________", bg="black",fg="grey").grid(row=4,column=0,columnspan=5)
-
-
+      
+      # Espacio para ingresar el nombre
       Titulo1 = tk.Label(marco, text="         1.      Ingrese su nombre completo          ", bg="DarkOliveGreen1").grid(row=5,column=0,columnspan=5)
       e1 = Entry(marco)
       e1.pack()
       e1.grid(row=7,column=0,columnspan=5,padx=10,ipadx=200)
       Barra2 = tk.Label(marco, text="________________________________________________________________________________________________________________", bg="black",fg="grey").grid(row=8,column=0,columnspan=5)
-      
+
+
+      # Espacio para ingresar la edad
       Titulo2 = tk.Label(marco, text="    2.	Ingrese su edad    ", bg="DarkOliveGreen1").grid(row=9,column=0,columnspan=5)
       Texto1 = tk.Label(marco, text="En numeros", bg="grey").grid(row=10,column=0,columnspan=5)
       e2 = Entry(marco)
       e2.pack()
       e2.grid(row=12,column=0,columnspan=5)
 
+
+      # primera pregunta de respuesta unica
       Barra3 = tk.Label(marco, text="________________________________________________________________________________________________________________", bg="black",fg="grey").grid(row=13,column=0,columnspan=5)
       Titulo3 = tk.Label(marco, text="    3.	¿Trabaja usted en algun servicio del sector salud?   ", bg="DarkOliveGreen1").grid(row=14,column=0,columnspan=5)
       Texto2 = tk.Label(marco, text="Seleccione una de las opciones", bg="grey").grid(row=15,column=0,columnspan=5)
       Bar4 = tk.Label(marco, text="___________________________________________________", bg="black",fg="black").grid(row=16,column=0,columnspan=5)
       seleccion = IntVar()
+      # opciones de respuesta para la pregunta
       Op1 = Radiobutton(marco,text='UCI', value=1, variable=seleccion)
       Op2 = Radiobutton(marco,text='Urgencias', value=2, variable=seleccion)
       Op3 = Radiobutton(marco,text='Hospitalizacion', value=3, variable=seleccion)
@@ -218,9 +201,11 @@ class Binario:
       Op9.grid(row=18,column=3)
       Op10.grid(row=18,column=4)
 
+      # primera pregunta de respuesta multiple
       Barra3 = tk.Label(marco, text="________________________________________________________________________________________________________________", bg="black",fg="grey").grid(row=19,column=0,columnspan=5)
       Titulo4 = tk.Label(marco, text="    4.	¿Presenta usted alguna de las siguientes condiciones?   ", bg="DarkOliveGreen1").grid(row=20,column=0,columnspan=5)
       Bar5 = tk.Label(marco, text="___________________________________________________", bg="black",fg="black").grid(row=21,column=0,columnspan=5)
+      # opciones de respuesta para la pregunta
       Con1 = BooleanVar()
       Con2 = BooleanVar()
       Con3 = BooleanVar()
@@ -252,11 +237,13 @@ class Binario:
       Chck9.grid(column=3, row=23)
       Chck10.grid(column=4, row=23)
 
+      # segunda pregunta de respuesta unica
       Barra4 = tk.Label(marco, text="________________________________________________________________________________________________________________", bg="black",fg="grey").grid(row=24,column=0,columnspan=5)
       Titulo5= tk.Label(marco, text="    5.       ¿Pertenece usted a alguna de las siguientes instituciones?   ", bg="DarkOliveGreen1").grid(row=25,column=0,columnspan=5)
       Texto2 = tk.Label(marco, text="Seleccione una de las opciones", bg="grey").grid(row=26,column=0,columnspan=5)
       Bar6 = tk.Label(marco, text="___________________________________________________", bg="black",fg="black").grid(row=27,column=0,columnspan=5)
       seleccion2 = IntVar()
+      # opciones de respuesta para la pregunta
       Opc1 = Radiobutton(marco,text='Sector educativo', value=1, variable=seleccion2)
       Opc2 = Radiobutton(marco,text='Fuerzas militares', value=2, variable=seleccion2)
       Opc3 = Radiobutton(marco,text='Policia nacional', value=3, variable=seleccion2)
@@ -278,6 +265,8 @@ class Binario:
       Opc9.grid(row=29,column=3)
       Opc10.grid(row=29,column=4)
 
+
+      #boton para ingresar los datos
       Barra5 = tk.Label(marco, text="________________________________________________________________________________________________________________", bg="black",fg="grey").grid(row=30,column=0,columnspan=5)
       Bar1 = tk.Label(marco, text="___________________________________________________", bg="black",fg="black").grid(row=31,column=0,columnspan=5)
       btnInsertar = Button(marco,text='Ingresar Datos', command=lambda: binario.ingresar_variables(e1.get(),e2.get(),seleccion.get(),Con1.get(),Con2.get(),Con3.get(),Con4.get(),Con5.get(),Con6.get(),Con7.get(),Con8.get(),Con9.get(),Con10.get(),seleccion2.get(),marco),borderwidth=7,bg="OliveDrab3",width=100, anchor="n").grid(row=32,column=0,columnspan=5,pady=4)
